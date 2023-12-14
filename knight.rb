@@ -2,7 +2,7 @@ class Knight
 
     MOVES = [[2, 1], [2, -1], [-2, 1], [-2, -1], [1, -2], [1, 2], [-1, -2], [-1, 2]]
 
-    attr_accessor :position, :visited
+    attr_accessor :position, :visited, :parent, :children
 
     def initialize(position, parent = nil)
         @position = position

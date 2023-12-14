@@ -12,15 +12,28 @@ class Graph
     que = [Knight.new(start)]
     current = que.shift
     
-    until current == destination
+    until current.position == destination
       current.legal_moves.each do |move|
-        current.children.append(move)
-        que.append(move)
+        child = Knight.new(move)
+        child.parent = current
+        current.children.append(child)
+        que.append(child)
       end
+      current = que.shift
     end
 
 
-    return moves
+    return get_history(current)
+  end
+
+  def get_history(node, output = [])
+    if node.parent.nil?
+      output.push(node.position)
+      return output.reverse
+    else
+      output.push(node.position)
+      get_history(node.parent, output)
+    end
   end
 
   
